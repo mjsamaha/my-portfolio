@@ -1,46 +1,35 @@
 [
   {
     "id": 1,
-    "type": "work",
-    "title": "Full Stack Developer",
-    "organization": "Tech Innovation Corp",
-    "location": "Remote",
-    "startDate": "2020-01",
-    "endDate": "Present",
-    "description": "Lead development of web applications using React, Angular, and Node.js. Implemented microservices architecture, improved application performance by 40%, and mentored junior developers. Established CI/CD pipelines and containerized applications with Docker.",
-    "technologies": ["React", "Angular", "Node.js", "PostgreSQL", "AWS"]
+    "type": "education",
+    "title": "Computer Systems Technology – Analysis and Design",
+    "organization": "Sheridan College",
+    "location": "Oakville ON",
+    "startDate": "2024",
+    "endDate": "2027",
+    "description": "Focused program in software development with emphasis on analysis, design, and implementation of computer systems.",
+    "technologies": ["Java", "Python", "C#", "Bash"]
   },
   {
     "id": 2,
     "type": "work",
-    "title": "Frontend Developer",
-    "organization": "Digital Solutions LLC",
-    "location": "New York, NY",
-    "startDate": "2018-06",
-    "endDate": "2019-12",
-    "description": "Developed responsive web applications and user interfaces. Collaborated with design teams to create pixel-perfect implementations. Optimized existing codebase resulting in 25% faster load times.",
-    "technologies": ["JavaScript", "Vue.js", "CSS/SASS", "Webpack"]
+    "title": "Naval Reservist",
+    "organization": "Canadian Armed Forces",
+    "location": "Toronto ON",
+    "startDate": "2022",
+    "endDate": "Present",
+    "description": "Active in Naval Cyber Network operations and cybersecurity initiatives.",
+    "technologies": ["Cybersecurity", "Network Operations"]
   },
   {
     "id": 3,
-    "type": "education",
-    "title": "Bachelor of Science in Computer Science",
-    "organization": "University of Technology",
-    "location": "Boston, MA",
-    "startDate": "2014-09",
-    "endDate": "2018-05",
-    "description": "Graduated with honors. Focused on software engineering principles, algorithms, and data structures. Active member of the Computing Society and developed several academic projects.",
-    "technologies": ["C++", "Java", "Python", "MySQL"]
-  },
-  {
-    "id": 4,
     "type": "work",
-    "title": "Junior Web Developer",
-    "organization": "StartupXYZ",
-    "location": "San Francisco, CA",
-    "startDate": "2018-01",
-    "endDate": "2018-05",
-    "description": "Learning practical web development skills while contributing to real projects. Worked on both frontend and backend components, gaining experience with modern development practices.",
-    "technologies": ["HTML", "CSS", "JavaScript", "PHP", "WordPress"]
+    "title": "Volunteer Instructor",
+    "organization": "Oakville Sea Cadets",
+    "location": "Oakville ON",
+    "startDate": "2023",
+    "endDate": "Present",
+    "description": "Currently designing a cadet inventory management system for logistics purposes.",
+    "technologies": ["Project Management", "Inventory Systems"]
   }
 ]

@@ -1,32 +1,12 @@
 [
   {
     "id": 1,
-    "title": "E-Commerce Platform",
-    "description": "A full-stack e-commerce application with user authentication, shopping cart, and payment integration. Built with React, Node.js, and MongoDB.",
-    "technologies": ["React", "Node.js", "MongoDB", "Stripe", "Express"],
-    "link": "https://github.com/yourusername/ecommerce-platform",
+    "title": "Cadet Inventory Management System",
+    "description": "This is still in research/planning, but to streamline cadet supply inventory processes.",
+    "technologies": ["Spring Boot", "Angular", "PostgreSQL", "H2-console", "Docker", "AWS"],
+    "link": "https://github.com/yourusername/cadet-inventory-system",
     "thumbnail": "/assets/images/project1.jpg",
-    "status": "Completed",
-    "category": "Web Application"
-  },
-  {
-    "id": 2,
-    "title": "Task Management App",
-    "description": "A collaborative task management application with real-time updates, team collaboration features, and deadline tracking.",
-    "technologies": ["Angular", "Firebase", "RxJS", "Material Design"],
-    "link": "https://github.com/yourusername/task-manager",
-    "thumbnail": "/assets/images/project2.jpg",
-    "status": "In-Development",
-    "category": "Productivity Tool"
-  },
-  {
-    "id": 3,
-    "title": "Weather Dashboard",
-    "description": "Interactive weather dashboard displaying current weather and forecasts with beautiful visualizations and responsive design.",
-    "technologies": ["Vue.js", "Chart.js", "OpenWeather API", "Tailwind CSS"],
-    "link": "https://github.com/yourusername/weather-dashboard",
-    "thumbnail": "/assets/images/project3.jpg",
     "status": "Planning",
-    "category": "Data Visualization"
+    "category": "Logistics System"
   }
 ]
