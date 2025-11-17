@@ -236,5 +236,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built with ❤️ using Angular & Tailwind CSS**
-
-*Replace all [SCREENSHOT PLACEHOLDER] tags with actual screenshots of your portfolio* 🎨
