@@ -1,0 +1,92 @@
+<section id="skills" class="py-20 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        Skills & Expertise
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        A comprehensive toolkit of modern technologies and frameworks I use to build exceptional web applications
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="skills$ | async as skills; else loading" class="space-y-16">
+      <!-- Main Skill Categories -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div *ngFor="let category of skills" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center group">
+          <div class="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">{{ category.category }}</h3>
+          <div class="space-y-2 mb-4">
+            <div *ngFor="let skill of category.skills" class="flex justify-between text-sm">
+              <span class="text-gray-700">{{ skill.name }}</span>
+              <span class="font-medium"
+                    [class]="skill.level >= 90 ? 'text-blue-600' :
+                             skill.level >= 80 ? 'text-green-600' :
+                             skill.level >= 70 ? 'text-orange-600' : 'text-red-600'">
+                {{ skill.level >= 90 ? 'Expert' :
+                   skill.level >= 80 ? 'Advanced' :
+                   skill.level < 70 ? 'Beginner' : 'Intermediate' }}
+              </span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600">
+            {{ category.category === 'Frontend Development' ? 'Modern frameworks, responsive design, state management' :
+              category.category === 'Backend Development' ? 'Server-side logic, API design, microservices' :
+              category.category === 'Databases' ? 'Data architecture, optimization, migrations' :
+              'Deployment, CI/CD, cloud infrastructure' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Additional Technologies -->
+       <!-- modify if needed -->
+      <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">Other Technologies & Methods</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+            <div class="text-2xl mb-2">🎮</div>
+            <span class="text-sm font-medium text-gray-800">LibGDX</span>
+            <div class="text-xs text-gray-600 mt-1">Game Development</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+            <div class="text-2xl mb-2">🖥️</div>
+            <span class="text-sm font-medium text-gray-800">JavaFX</span>
+            <div class="text-xs text-gray-600 mt-1">Desktop Applications</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+            <div class="text-2xl mb-2">🧪</div>
+            <span class="text-sm font-medium text-gray-800">Unit Testing</span>
+            <div class="text-xs text-gray-600 mt-1">Quality Assurance</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+            <div class="text-2xl mb-2">📄</div>
+            <span class="text-sm font-medium text-gray-800">Thymeleaf</span>
+            <div class="text-xs text-gray-600 mt-1">Server-side Templates</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+            <div class="text-2xl mb-2">📊</div>
+            <span class="text-sm font-medium text-gray-800">Data Visualization</span>
+            <div class="text-xs text-gray-600 mt-1">Charts & Analytics</div>
+          </div>
+          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+            <div class="text-2xl mb-2">⚡</div>
+            <span class="text-sm font-medium text-gray-800">Performance Optimization</span>
+            <div class="text-xs text-gray-600 mt-1">Fast & Efficient Apps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <ng-template #loading>
+      <div class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <p class="mt-4 text-gray-600">Loading skills...</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

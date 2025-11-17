@@ -1,0 +1,134 @@
+<section id="projects" class="py-20 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        Featured Projects
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+        A collection of my recent work showcasing diverse technologies and problem-solving approaches
+      </p>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button *ngFor="let filter of filterOptions"
+                (click)="setFilter(filter.value)"
+                [class]="filter.color + ' px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'"
+                [class.ring-2]="getCurrentFilter() === filter.value"
+                [class.ring-blue-500]="getCurrentFilter() === filter.value">
+          {{ filter.label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <ng-container *ngIf="filteredProjects$ | async as projects; else loading">
+        <div *ngFor="let project of projects; let i = index; trackBy: trackByFn"
+             class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+             [class.md:col-span-2]="i === projects.length - 1 && projects.length % 2 === 1"
+             [class.lg:col-span-1]="i === projects.length - 1 && projects.length % 2 === 1">
+
+          <!-- Project Image/Placeholder -->
+          <div class="h-48 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center" *ngIf="i === 0"
+                 style="background: linear-gradient(to bottom right, #60a5fa, #3b82f6);">
+              <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center" *ngIf="i === 1"
+                 style="background: linear-gradient(to bottom right, #34d399, #10b981);">
+              <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+              </svg>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center" *ngIf="i === 2"
+                 style="background: linear-gradient(to bottom right, #a78bfa, #8b5cf6);">
+              <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+              </svg>
+            </div>
+
+            <!-- Year Badge -->
+            <div class="absolute top-4 right-4">
+              <span class="px-2 py-1 bg-white bg-opacity-90 text-blue-800 rounded-full text-xs font-medium">
+                {{ i === 0 ? '2024' : i === 1 ? '2023' : '2024' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Project Content -->
+          <div class="p-6">
+            <div class="flex items-center mb-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3"
+                   [style]="i === 0 ? 'background: linear-gradient(to bottom right, #3b82f6, #1d4ed8)' :
+                             i === 1 ? 'background: linear-gradient(to bottom right, #10b981, #059669)' :
+                             'background: linear-gradient(to bottom right, #8b5cf6, #7c3aed)'">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     *ngIf="i === 0">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     *ngIf="i === 1">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     *ngIf="i === 2">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">{{ project.title }}</h3>
+            </div>
+            <p class="text-gray-600 mb-4 leading-relaxed">{{ project.description }}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span *ngFor="let tech of project.technologies"
+                    class="px-3 py-1 text-sm rounded-full font-medium"
+                    [class]="getTechColorClass(tech)">
+                {{ tech }}
+              </span>
+            </div>
+            <div class="flex gap-4 pt-2 border-t border-gray-100">
+              <a [href]="project.link" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+                Live Demo
+              </a>
+              <a [href]="project.link" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center text-gray-600 hover:text-gray-800 font-medium transition-colors">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #loading>
+        <div class="text-center py-12 col-span-full">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <p class="mt-4 text-gray-600">Loading projects...</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- CTA for more work -->
+    <div class="text-center mt-12">
+      <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-gray-100">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Want to see more of my work?</h3>
+        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+          I'm always working on new projects and love taking on challenging problems.
+          Let's discuss how I can help bring your ideas to life.
+        </p>
+        <a href="#contact" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+          Get In Touch
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

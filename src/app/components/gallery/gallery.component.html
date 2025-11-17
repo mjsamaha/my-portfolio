@@ -1,0 +1,195 @@
+<section id="gallery" class="py-20 px-4 bg-gradient-to-br from-green-50 to-blue-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <div class="inline-block mb-6">
+        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+          📸 Wildlife Photography
+        </span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-6">
+        Bird Photography Gallery
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12">
+        A curated collection of avian moments captured in the Pacific Northwest.
+        Click any image to explore in detail.
+      </p>
+    </div>
+
+    <!-- Main Carousel -->
+    <div class="relative mb-8">
+      <!-- Carousel Container -->
+      <div class="relative overflow-hidden rounded-3xl shadow-2xl bg-white">
+        <!-- Main Image -->
+        <div class="aspect-[16/10] relative">
+          <img [src]="getImagePath(birdPhotos[currentIndex].filename)"
+               [alt]="birdPhotos[currentIndex].commonName + ' - ' + (birdPhotos[currentIndex].description || '')"
+               class="w-full h-full object-cover cursor-pointer transition-all duration-500 hover:scale-105"
+               (click)="openModal(currentIndex)"
+               (error)="onImageError($event)">
+
+          <!-- Overlay with title -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">{{ birdPhotos[currentIndex].commonName }}</h3>
+              <p class="text-white/90 text-sm md:text-base">
+                <em>{{ birdPhotos[currentIndex].scientificName }}</em>
+              </p>
+              <p class="text-white/80 text-xs md:text-sm mt-1">
+                {{ birdPhotos[currentIndex].location }}
+                <span *ngIf="birdPhotos[currentIndex].description"> • {{ birdPhotos[currentIndex].description }}</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button (click)="prevImage()"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/20 hover:bg-black/40 text-white rounded-full transition-all duration-200 backdrop-blur-sm">
+            <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button (click)="nextImage()"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/20 hover:bg-black/40 text-white rounded-full transition-all duration-200 backdrop-blur-sm">
+            <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="flex justify-center space-x-4 mt-6">
+        <div *ngFor="let photo of birdPhotos; let i = index; trackBy: trackByPhoto"
+             (click)="goToImage(i)"
+             class="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-300 border-2"
+             [class.border-green-500]="i === currentIndex"
+             [class.border-gray-300]="i !== currentIndex"
+             [class.shadow-lg]="i === currentIndex"
+             [class.hover:opacity-80]="i !== currentIndex">
+          <img [src]="getImagePath(photo.filename)"
+               [alt]="photo.commonName"
+               class="w-full h-full object-cover"
+               (error)="onImageError($event)">
+        </div>
+      </div>
+
+      <!-- Indicators -->
+      <div class="flex justify-center mt-4 space-x-2">
+        <div *ngFor="let photo of birdPhotos; let i = index"
+             (click)="goToImage(i)"
+             class="w-3 h-3 rounded-full cursor-pointer transition-all duration-200"
+             [class.bg-green-600]="i === currentIndex"
+             [class.bg-gray-300]="i !== currentIndex">
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Footer -->
+    <div class="text-center mt-16">
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">📸 Passion for Wildlife Photography</h3>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Capturing the beauty and diversity of avian life brings me as much joy as building software.
+          Each photo represents a moment of connection with nature and a testament to the incredible
+          biodiversity of our world. From powerful raptors to elegant waterfowl, every species has its own story.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 text-sm">
+          <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">Wildlife Photography</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Pacific Northwest</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full">Conservation</span>
+          <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full">Nature</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal/Lightbox -->
+<div *ngIf="isModalOpen"
+     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300"
+     (click)="closeModal()">
+
+  <!-- Modal Content -->
+  <div class="relative max-w-6xl w-full max-h-full p-4" (click)="$event.stopPropagation()">
+    <!-- Close Button -->
+    <button (click)="closeModal()"
+            class="absolute -top-12 right-0 w-8 h-8 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors duration-200 backdrop-blur-sm z-10">
+      <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Modal Navigation Left -->
+    <button (click)="prevModalImage()"
+            class="absolute -left-16 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors duration-200 backdrop-blur-sm">
+      <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <!-- Modal Navigation Right -->
+    <button (click)="nextModalImage()"
+            class="absolute -right-16 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors duration-200 backdrop-blur-sm">
+      <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Main Modal Image -->
+    <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
+      <div class="aspect-[16/10] relative">
+        <img [src]="getImagePath(birdPhotos[modalImageIndex].filename)"
+             [alt]="birdPhotos[modalImageIndex].commonName"
+             class="w-full h-full object-cover"
+             (error)="onImageError($event)">
+
+        <!-- Image counter -->
+        <div class="absolute top-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium">
+          {{ modalImageIndex + 1 }} / {{ birdPhotos.length }}
+        </div>
+      </div>
+
+      <!-- Modal Details Section -->
+      <div class="p-6 md:p-8 bg-white">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Photo Information -->
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              {{ birdPhotos[modalImageIndex].commonName }}
+            </h3>
+            <p class="text-lg text-gray-600 mb-4">
+              <em>{{ birdPhotos[modalImageIndex].scientificName }}</em>
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-semibold text-gray-800 mb-1">📍 Location</h4>
+                <p class="text-gray-600">{{ birdPhotos[modalImageIndex].location }}</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg" *ngIf="birdPhotos[modalImageIndex].description">
+                <h4 class="font-semibold text-gray-800 mb-1">📸 Moment</h4>
+                <p class="text-gray-600">{{ birdPhotos[modalImageIndex].description }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thumbnail Navigation -->
+          <div>
+            <h4 class="font-semibold text-gray-800 mb-3">All Photographs</h4>
+            <div class="grid grid-cols-5 gap-2">
+              <div *ngFor="let photo of birdPhotos; let i = index; trackBy: trackByPhoto"
+                   (click)="modalImageIndex = i"
+                   class="aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-2"
+                   [class.border-green-500]="i === modalImageIndex"
+                   [class.border-gray-300]="i !== modalImageIndex">
+                <img [src]="getImagePath(photo.filename)"
+                     [alt]="photo.commonName"
+                     class="w-full h-full object-cover"
+                     (error)="onImageError($event)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
