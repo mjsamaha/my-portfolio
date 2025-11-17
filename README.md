@@ -26,20 +26,6 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 - **Data-Driven Content** - JSON-based content management for easy updates
 - **Modern Development Stack** - Latest Angular with RxJS observables and reactive forms
 
-## 🖥️ Screenshots
-
-### Desktop View
-![Desktop Portfolio View][SCREENSHOT PLACEHOLDER - Desktop View]
-
-### Mobile Responsive Design
-![Mobile Portfolio View][SCREENSHOT PLACEHOLDER - Mobile View]
-
-### Interactive Project Filtering
-![Project Filtering Demo][SCREENSHOT PLACEHOLDER - Project Filtering]
-
-### Contact Form Interface
-![Contact Form Screenshot][SCREENSHOT PLACEHOLDER - Contact Form]
-
 ## 🔧 Tech Stack
 
 ### Frontend Framework
@@ -59,7 +45,7 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 - **Git** - Version control
 
 ### Infrastructure
-- **Vercel** - Full-stack deployment platform (frontend + serverless API functions)
+- **Netlify** - Full-stack deployment platform (frontend + serverless API functions)
 - **Formspree** - Serverless form handling
 
 ## 📁 Project Structure
@@ -91,7 +77,6 @@ portfolio/
 │   │       │   └── projects.json       # Projects data
 │   │       └── images/          # Portfolio images
 │   └── environments/            # Environment configurations
-├── vercel.json                   # Vercel deployment config
 └── public/                      # Static assets
 ```
 
@@ -140,10 +125,6 @@ The application will automatically reload when you save changes to your source f
 2. Create a new form and note your form ID
 3. Update the form endpoint in `contact.component.ts`:
 
-```typescript
-// Replace YOUR_FORM_ID with your actual Formspree form ID
-const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-```
 
 ### Customizing Content
 
@@ -195,12 +176,6 @@ ng build
 ng build --prod
 ```
 
-### Vercel Deployment
-
-1. **Connect your GitHub repository** to Vercel
-2. **Vercel will automatically detect** your Angular app and serverless functions
-3. **Deploy** - Vercel handles building the frontend and functions
-
 ### Alternative Static Hosting
 
 Deploy the `dist/` folder to platforms like:
@@ -231,5 +206,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built with ❤️ using Angular & Tailwind CSS**
-
-*Replace all [SCREENSHOT PLACEHOLDER] tags with actual screenshots of your portfolio* 🎨
