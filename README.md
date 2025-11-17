@@ -2,7 +2,8 @@
 
 A modern, responsive portfolio showcasing my development expertise and diverse professional background. Built with Angular and Tailwind CSS, featuring interactive components, contact forms, and a comprehensive skills showcase.
 
-![Portfolio Preview][screenshots/initial_capture.PNG]
+<img width="1249" height="920" alt="initial_capture" src="https://github.com/user-attachments/assets/1f8b6389-a848-45de-bb8c-c3ba32c4ac90" />
+
 
 ## ✨ Key Features
 
@@ -27,17 +28,9 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 
 ## 🖥️ Screenshots
 
-### Desktop View
-![Desktop Portfolio View][SCREENSHOT PLACEHOLDER - Desktop View]
+### Bird Gallery
+<img width="505" height="671" alt="photography" src="https://github.com/user-attachments/assets/4d39ce35-a264-47d0-bc91-7b4cf401ce0a" />
 
-### Mobile Responsive Design
-![Mobile Portfolio View][SCREENSHOT PLACEHOLDER - Mobile View]
-
-### Interactive Project Filtering
-![Project Filtering Demo][SCREENSHOT PLACEHOLDER - Project Filtering]
-
-### Contact Form Interface
-![Contact Form Screenshot][SCREENSHOT PLACEHOLDER - Contact Form]
 
 ## 🔧 Tech Stack
 
@@ -239,15 +232,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Tailwind CSS** for the utility-first approach
 - **Formspree** for hassle-free form handling
 - **Open source community** for inspiration and tools
-
-## 📬 Contact
-
-For questions, collaborations, or opportunities:
-
-- **Portfolio:** [View Live Site](#)
-- **LinkedIn:** [Your LinkedIn Profile](#)
-- **GitHub:** [Your GitHub Profile](#)
-- **Email:** your.email@example.com
 
 ---
 
