@@ -44,22 +44,34 @@ export class ApiService {
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(`${environment.apiUrl}/projects`)
       .pipe(
-        catchError(this.handleError)
+        catchError(() => this.loadLocalProjects())
       );
   }
 
   getSkills(): Observable<SkillCategory[]> {
     return this.http.get<SkillCategory[]>(`${environment.apiUrl}/skills`)
       .pipe(
-        catchError(this.handleError)
+        catchError(() => this.loadLocalSkills())
       );
   }
 
   getExperience(): Observable<Experience[]> {
     return this.http.get<Experience[]>(`${environment.apiUrl}/experience`)
       .pipe(
-        catchError(this.handleError)
+        catchError(() => this.loadLocalExperience())
       );
+  }
+
+  private loadLocalProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>('assets/data/projects.json');
+  }
+
+  private loadLocalSkills(): Observable<SkillCategory[]> {
+    return this.http.get<SkillCategory[]>('assets/data/skills.json');
+  }
+
+  private loadLocalExperience(): Observable<Experience[]> {
+    return this.http.get<Experience[]>('assets/data/experience.json');
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
