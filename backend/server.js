@@ -7,7 +7,33 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:4200', // Allow Angular dev server
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl requests, etc.)
+    if (!origin) return callback(null, true);
+
+    // Allow any origin in production, localhost in development
+    const allowedOrigins = [
+      'http://localhost:4200', // Angular dev server
+      'http://localhost:3000', // Alternative dev port
+      'https://your-portfolio.onrender.com', // Replace with your actual Render URL
+      // Add your custom domain here when you have one
+    ];
+
+    // In development, allow localhost. In production, be more restrictive
+    const isDevelopment = process.env.NODE_ENV !== 'production';
+
+    if (isDevelopment && origin.includes('localhost')) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin) || origin.includes('onrender.com')) {
+      return callback(null, true);
+    }
+
+    // For stricter security, uncomment this line after deployment:
+    // callback(new Error('Not allowed by CORS'));
+    callback(null, true); // Temporarily allow all for deployment
+  },
   credentials: true
 }));
 app.use(express.json());

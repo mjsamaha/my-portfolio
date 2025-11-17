@@ -27,17 +27,11 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 
 ## 🖥️ Screenshots
 
-### Desktop View
-![Desktop Portfolio View][SCREENSHOT PLACEHOLDER - Desktop View]
-
-### Mobile Responsive Design
-![Mobile Portfolio View][SCREENSHOT PLACEHOLDER - Mobile View]
-
-### Interactive Project Filtering
-![Project Filtering Demo][SCREENSHOT PLACEHOLDER - Project Filtering]
+### Bird Photography
+![Photography Portfolio View][screenshots/photography.PNG]
 
 ### Contact Form Interface
-![Contact Form Screenshot][SCREENSHOT PLACEHOLDER - Contact Form]
+![Contact Form Screenshot][screenshots/form.PNG]
 
 ## 🔧 Tech Stack
 
@@ -250,7 +244,3 @@ For questions, collaborations, or opportunities:
 - **Email:** your.email@example.com
 
 ---
-
-**Built with ❤️ using Angular & Tailwind CSS**
-
-*Replace all [SCREENSHOT PLACEHOLDER] tags with actual screenshots of your portfolio* 🎨

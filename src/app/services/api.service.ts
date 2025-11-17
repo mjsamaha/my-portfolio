@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Project {
   id: number;
@@ -37,26 +38,25 @@ export interface Experience {
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.apiUrl}/projects`)
+    return this.http.get<Project[]>(`${environment.apiUrl}/projects`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getSkills(): Observable<SkillCategory[]> {
-    return this.http.get<SkillCategory[]>(`${this.apiUrl}/skills`)
+    return this.http.get<SkillCategory[]>(`${environment.apiUrl}/skills`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getExperience(): Observable<Experience[]> {
-    return this.http.get<Experience[]>(`${this.apiUrl}/experience`)
+    return this.http.get<Experience[]>(`${environment.apiUrl}/experience`)
       .pipe(
         catchError(this.handleError)
       );

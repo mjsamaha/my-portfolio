@@ -4,8 +4,10 @@
   "description": "Portfolio API backend server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": ["portfolio", "api", "backend"],
   "author": "Portfolio Owner",
