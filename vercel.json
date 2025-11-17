@@ -1,7 +1,14 @@
 {
+  "buildCommand": "ng build",
+  "outputDirectory": "dist",
+  "framework": "angular",
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
