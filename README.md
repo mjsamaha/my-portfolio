@@ -21,7 +21,7 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 - **Professional Typography** - Carefully chosen font stacks and responsive text scaling
 
 ### 🛠 **Technical Highlights**
-- **Full-Stack Architecture** - Angular frontend + Node.js API backend
+- **Full-Stack Architecture** - Angular frontend + Vercel serverless API functions
 - **Component-Based Architecture** - Modular, maintainable Angular components
 - **Data-Driven Content** - JSON-based content management for easy updates
 - **Modern Development Stack** - Latest Angular with RxJS observables and reactive forms
@@ -59,14 +59,18 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 - **Git** - Version control
 
 ### Infrastructure
-- **Vercel** - Frontend deployment platform
-- **Railway/Render** - Backend API hosting
+- **Vercel** - Full-stack deployment platform (frontend + serverless API functions)
 - **Formspree** - Serverless form handling
 
 ## 📁 Project Structure
 
 ```
 portfolio/
+├── api/                          # Vercel serverless functions
+│   ├── projects.js              # Projects API endpoint
+│   ├── skills.js                # Skills API endpoint
+│   ├── experience.js            # Experience API endpoint
+│   └── health.js                # Health check endpoint
 ├── src/
 │   ├── app/
 │   │   ├── components/           # Angular components
@@ -81,14 +85,13 @@ portfolio/
 │   │   ├── services/            # Angular services
 │   │   │   └── api.service.ts   # HTTP client service
 │   │   └── assets/               # Static assets
+│   │       ├── data/            # JSON data files
+│   │       │   ├── skills.json         # Skills data
+│   │       │   ├── experience.json     # Experience data
+│   │       │   └── projects.json       # Projects data
 │   │       └── images/          # Portfolio images
-├── backend/
-│   ├── data/                    # JSON data files
-│   │   ├── skills.json         # Skills data
-│   │   ├── experience.json     # Experience data
-│   │   └── projects.json       # Projects data
-│   ├── package.json             # Backend dependencies
-│   └── server.js                # Express server
+│   └── environments/            # Environment configurations
+├── vercel.json                   # Vercel deployment config
 └── public/                      # Static assets
 ```
 
@@ -112,35 +115,22 @@ git clone https://github.com/yourusername/portfolio.git
 cd portfolio
 ```
 
-2. **Install frontend dependencies**
+2. **Install dependencies**
 ```bash
 npm install
-```
-
-3. **Install backend dependencies**
-```bash
-cd backend
-npm install
-cd ..
 ```
 
 ### Development Setup
 
-1. **Start the backend API** (in a separate terminal)
-```bash
-cd backend
-npm start
-```
-
-2. **Start the Angular development server**
+1. **Start the Angular development server**
 ```bash
 ng serve
 ```
 
-3. **Open your browser**
+2. **Open your browser**
 Navigate to `http://localhost:4200`
 
-The application will automatically reload when you save changes to your source files.
+The application will automatically reload when you save changes to your source files. The API will gracefully fall back to local data files during development.
 
 ## 🔗 Configuration
 
@@ -157,7 +147,7 @@ const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
 
 ### Customizing Content
 
-Edit the JSON files in `backend/data/` to personalize:
+Edit the JSON files in `src/assets/data/` to personalize:
 
 - **Skills** - Update technologies and proficiency levels
 - **Experience** - Modify work history and projects
@@ -205,20 +195,17 @@ ng build
 ng build --prod
 ```
 
-### Frontend Deployment
+### Vercel Deployment
+
+1. **Connect your GitHub repository** to Vercel
+2. **Vercel will automatically detect** your Angular app and serverless functions
+3. **Deploy** - Vercel handles building the frontend and functions
+
+### Alternative Static Hosting
 
 Deploy the `dist/` folder to platforms like:
-- **Vercel** (recommended for Angular)
 - **Netlify**
 - **GitHub Pages**
-
-### Backend Deployment
-
-Deploy the backend to:
-- **Railway**
-- **Render**
-- **Heroku**
-- **AWS EC2/DigitalOcean**
 
 ## 🤝 Contributing
 
