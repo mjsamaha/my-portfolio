@@ -3,8 +3,8 @@
     "id": 1,
     "title": "Cadet Inventory Management System",
     "description": "This is still in research/planning, but to streamline cadet supply inventory processes.",
-    "technologies": ["Spring Boot", "Angular", "PostgreSQL", "H2-console", "Docker", "AWS"],
-    "link": "https://github.com/yourusername/cadet-inventory-system",
+    "technologies": ["ExpressJS", "Angular", "PostgreSQL"],
+    "link": "https://github.com/mjsamaha/projects/wiki/Cadet-Inventory-Management-System",
     "thumbnail": "/assets/images/project1.jpg",
     "status": "Planning",
     "category": "Logistics System"
