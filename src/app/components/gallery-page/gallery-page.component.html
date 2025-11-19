@@ -1,0 +1,164 @@
+<div class="min-h-screen bg-gray-50 flex flex-col">
+  <!-- Header -->
+  <app-header></app-header>
+
+  <!-- Main Content -->
+  <main class="flex-1 pt-16">
+    <section class="py-20 px-4 bg-gradient-to-br from-green-50 to-blue-50">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header Section -->
+        <div class="text-center mb-16">
+          <div class="inline-block mb-6">
+            <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+              📸 Wildlife Photography
+            </span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-6">
+            Bird Photography Gallery
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            A curated collection of avian moments captured in the Greater Toronto Area.
+          </p>
+        </div>
+
+        <!-- Image Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          <div *ngFor="let photo of birdPhotos; let i = index; trackBy: trackByPhoto"
+               class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+               (click)="openModal(i)">
+            <!-- Image Container with Aspect Ratio -->
+            <div class="aspect-[4/3] relative overflow-hidden bg-gray-100">
+              <picture>
+                <source [srcset]="getImagePath(photo.filename)" type="image/jpeg">
+                <img [src]="getImagePath(photo.filename)"
+                     [alt]="photo.commonName + ' - ' + photo.scientificName"
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     [loading]="i < 4 ? 'eager' : 'lazy'"
+                     [attr.fetchpriority]="i < 4 ? 'high' : 'auto'"
+                     (error)="onImageError($event)">
+              </picture>
+
+              <!-- Overlay on Hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div class="p-4 text-white w-full">
+                  <h3 class="text-lg font-bold mb-1">{{ photo.commonName }}</h3>
+                  <p class="text-sm text-white/90 italic mb-2">{{ photo.scientificName }}</p>
+                  <p class="text-xs text-white/80">{{ photo.location }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Footer (visible on mobile) -->
+            <div class="p-4 md:hidden">
+              <h3 class="font-semibold text-gray-900 mb-1">{{ photo.commonName }}</h3>
+              <p class="text-sm text-gray-600 italic">{{ photo.scientificName }}</p>
+              <p class="text-xs text-gray-500 mt-1">{{ photo.location }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery Footer -->
+        <div class="text-center mt-16">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-4xl mx-auto">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">📸 Passion for Bird Photography</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Capturing the beauty and diversity of avian life brings me as much joy as building software.
+              Each photo represents a moment of connection with nature and a testament to the incredible
+              biodiversity of our world. From powerful raptors to elegant waterfowl in their own habitat.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm mb-8">
+              <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">Bird Photography</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Southern Ontario | Greater Toronto Area</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full">Conservation</span>
+              <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full">Nature</span>
+            </div>
+
+            <!-- Flickr Link Section -->
+            <div class="pt-6 border-t border-gray-200">
+              <p class="text-gray-600 mb-4 leading-relaxed">
+                Want to see more of my bird photography? Visit my collection on Flickr for additional photos and galleries.
+              </p>
+              <a href="https://www.flickr.com/people/198343314@N05/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 12c0 3.074 2.494 5.564 5.565 5.564 3.075 0 5.569-2.49 5.569-5.564 0-3.075-2.494-5.565-5.569-5.565C2.494 6.435 0 8.925 0 12zm12.866 0c0 3.074 2.493 5.564 5.567 5.564C21.502 17.564 24 15.074 24 12c0-3.075-2.498-5.565-5.567-5.565-3.074 0-5.567 2.49-5.567 5.565z"/>
+                </svg>
+                <span>View My Flickr Gallery</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>
+
+<!-- Full-Screen Modal Lightbox -->
+<div *ngIf="isModalOpen"
+     class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity duration-300"
+     (click)="closeModal()">
+
+  <!-- Close Button (Top Right) -->
+  <button (click)="closeModal(); $event.stopPropagation()"
+          class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-200 backdrop-blur-sm z-20 flex items-center justify-center">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <!-- Navigation Button Left -->
+  <button (click)="prevModalImage(); $event.stopPropagation()"
+          class="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-200 backdrop-blur-sm z-20 flex items-center justify-center">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+
+  <!-- Navigation Button Right -->
+  <button (click)="nextModalImage(); $event.stopPropagation()"
+          class="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-200 backdrop-blur-sm z-20 flex items-center justify-center">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <!-- Image Container -->
+  <div class="relative w-full h-full flex items-center justify-center p-4 md:p-8" (click)="$event.stopPropagation()">
+    <!-- Image Counter (Top Left) -->
+    <div class="absolute top-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm z-10">
+      {{ modalImageIndex + 1 }} / {{ birdPhotos.length }}
+    </div>
+
+    <!-- Main Image -->
+    <img [src]="getImagePath(birdPhotos[modalImageIndex].filename)"
+         [alt]="birdPhotos[modalImageIndex].commonName"
+         class="max-w-full max-h-[85vh] object-contain transition-opacity duration-200 modal-image-transition"
+         (error)="onImageError($event)">
+
+    <!-- Metadata Overlay (Bottom) -->
+    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent p-6 md:p-8 text-white modal-metadata-enter">
+      <h3 class="text-2xl md:text-3xl font-bold mb-2">
+        {{ birdPhotos[modalImageIndex].commonName }}
+      </h3>
+      <p class="text-base md:text-lg text-white/80 italic mb-3">
+        {{ birdPhotos[modalImageIndex].scientificName }}
+      </p>
+      <div class="flex items-center text-sm md:text-base text-white/70">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span>{{ birdPhotos[modalImageIndex].location }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
