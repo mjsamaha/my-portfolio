@@ -3,8 +3,8 @@
     "category": "Frontend",
     "skills": [
       { "name": "HTML", "level": 95, "description": "Semantic HTML5 markup and structure" },
-      { "name": "CSS", "level": 95, "description": "Modern CSS3 with responsive design" },
       { "name": "Angular", "level": 85, "description": "Component-based framework for scalable applications" },
+      { "name": "Thymeleaf", "level": 75, "description": "Server-side Templates" },
       { "name": "Tailwind CSS", "level": 88, "description": "Utility-first CSS framework for rapid UI development" }
     ]
   },
@@ -12,7 +12,6 @@
     "category": "Backend",
     "skills": [
       { "name": "NodeJS", "level": 85, "description": "JavaScript runtime for server-side development" },
-      { "name": "Express", "level": 85, "description": "Fast, minimalist web framework for Node.js" },
       { "name": "Spring Boot", "level": 75, "description": "Java-based framework for enterprise applications" }
     ]
   },
@@ -20,27 +19,14 @@
     "category": "Database",
     "skills": [
       { "name": "MongoDB", "level": 80, "description": "NoSQL document database for flexible data storage" },
-      { "name": "PostgreSQL", "level": 75, "description": "Advanced open-source relational database" },
-      { "name": "H2-console", "level": 70, "description": "In-memory database for development and testing" }
+      { "name": "PostgreSQL", "level": 75, "description": "Advanced open-source relational database" }
     ]
   },
   {
     "category": "Tools & Others",
     "skills": [
-      { "name": "Git", "level": 90, "description": "Version control and collaborative development" },
       { "name": "Docker", "level": 75, "description": "Containerization for consistent deployments" },
-      { "name": "AWS", "level": 70, "description": "Cloud infrastructure and services" }
-    ]
-  },
-  {
-    "category": "Other Technologies & Methods",
-    "skills": [
-      { "name": "LibGDX", "level": 0, "description": "Game Development" },
-      { "name": "JavaFX", "level": 0, "description": "Desktop Applications" },
-      { "name": "Unit Testing", "level": 0, "description": "Quality Assurance" },
-      { "name": "Thymeleaf", "level": 0, "description": "Server-side Templates" },
-      { "name": "Data Visualization", "level": 0, "description": "Charts & Analytics" },
-      { "name": "Performance Optimization", "level": 0, "description": "Fast & Efficient Apps" }
+      { "name": "Git", "level": 90, "description": "Version control and collaborative development" }
     ]
   }
 ]
