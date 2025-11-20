@@ -12,70 +12,70 @@
     <!-- Loading State -->
     <div *ngIf="skills$ | async as skills; else loading" class="space-y-16">
       <!-- Main Skill Categories -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div *ngFor="let category of skills" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center group">
-          <div class="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div *ngFor="let category of skills; trackBy: trackByCategory" 
+             class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+          <!-- Category Header -->
+          <div class="mb-6">
+            <div class="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 text-center mb-2">{{ category.category }}</h3>
+            <p class="text-sm text-gray-600 text-center">
+              {{ category.category === 'Frontend' ? 'Modern frameworks, responsive design, state management' :
+                category.category === 'Backend' ? 'Server-side logic, API design, microservices' :
+                category.category === 'Database' ? 'Data architecture, optimization, migrations' :
+                'Deployment, CI/CD, cloud infrastructure' }}
+            </p>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">{{ category.category }}</h3>
-          <div class="space-y-2 mb-4">
-            <div *ngFor="let skill of category.skills" class="flex justify-between text-sm">
-              <span class="text-gray-700">{{ skill.name }}</span>
-              <span class="font-medium"
-                    [class]="skill.level >= 90 ? 'text-blue-600' :
-                             skill.level >= 80 ? 'text-green-600' :
-                             skill.level >= 70 ? 'text-orange-600' : 'text-red-600'">
-                {{ skill.level >= 90 ? 'Expert' :
-                   skill.level >= 80 ? 'Advanced' :
-                   skill.level < 70 ? 'Beginner' : 'Intermediate' }}
-              </span>
+
+          <!-- Skills Grid -->
+          <div class="grid grid-cols-2 gap-3">
+            <div *ngFor="let skill of category.skills; trackBy: trackBySkill"
+                 class="skill-card relative group/skill bg-gradient-to-br {{ category.colorScheme.bg }} border {{ category.colorScheme.border }} rounded-lg p-4 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md"
+                 [attr.data-tooltip]="skill.description || skill.name">
+              <!-- Icon -->
+              <div class="w-10 h-10 mx-auto mb-2 flex items-center justify-center"
+                   [innerHTML]="getSanitizedSvg(skill.iconData)"
+                   [style.color]="skill.iconData.color">
+              </div>
+              <!-- Skill Name -->
+              <span class="text-xs font-medium {{ category.colorScheme.text }} block">{{ skill.name }}</span>
+              
+              <!-- Tooltip -->
+              <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 invisible group-hover/skill:opacity-100 group-hover/skill:visible transition-all duration-200 whitespace-nowrap z-10 pointer-events-none">
+                {{ skill.description || skill.name }}
+                <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+              </div>
             </div>
           </div>
-          <p class="text-sm text-gray-600">
-            {{ category.category === 'Frontend Development' ? 'Modern frameworks, responsive design, state management' :
-              category.category === 'Backend Development' ? 'Server-side logic, API design, microservices' :
-              category.category === 'Databases' ? 'Data architecture, optimization, migrations' :
-              'Deployment, CI/CD, cloud infrastructure' }}
-          </p>
         </div>
       </div>
 
-      <!-- Additional Technologies -->
-       <!-- modify if needed -->
-      <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+      <!-- Other Technologies & Methods -->
+      <div *ngIf="otherTechnologies$ | async as otherTech" 
+           class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">Other Technologies & Methods</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-            <div class="text-2xl mb-2">🎮</div>
-            <span class="text-sm font-medium text-gray-800">LibGDX</span>
-            <div class="text-xs text-gray-600 mt-1">Game Development</div>
-          </div>
-          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-            <div class="text-2xl mb-2">🖥️</div>
-            <span class="text-sm font-medium text-gray-800">JavaFX</span>
-            <div class="text-xs text-gray-600 mt-1">Desktop Applications</div>
-          </div>
-          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-            <div class="text-2xl mb-2">🧪</div>
-            <span class="text-sm font-medium text-gray-800">Unit Testing</span>
-            <div class="text-xs text-gray-600 mt-1">Quality Assurance</div>
-          </div>
-          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-            <div class="text-2xl mb-2">📄</div>
-            <span class="text-sm font-medium text-gray-800">Thymeleaf</span>
-            <div class="text-xs text-gray-600 mt-1">Server-side Templates</div>
-          </div>
-          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-            <div class="text-2xl mb-2">📊</div>
-            <span class="text-sm font-medium text-gray-800">Data Visualization</span>
-            <div class="text-xs text-gray-600 mt-1">Charts & Analytics</div>
-          </div>
-          <div class="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-            <div class="text-2xl mb-2">⚡</div>
-            <span class="text-sm font-medium text-gray-800">Performance Optimization</span>
-            <div class="text-xs text-gray-600 mt-1">Fast & Efficient Apps</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div *ngFor="let skill of otherTech.skills; trackBy: trackBySkill"
+               class="skill-card relative group/skill bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg p-4 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md">
+            <!-- Icon -->
+            <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center"
+                 [innerHTML]="getSanitizedSvg(skill.iconData)"
+                 [style.color]="skill.iconData.color">
+            </div>
+            <!-- Skill Name -->
+            <span class="text-sm font-medium text-gray-800 block mb-1">{{ skill.name }}</span>
+            <!-- Description -->
+            <div class="text-xs text-gray-600">{{ skill.description }}</div>
+            
+            <!-- Tooltip -->
+            <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 invisible group-hover/skill:opacity-100 group-hover/skill:visible transition-all duration-200 whitespace-nowrap z-10 pointer-events-none">
+              {{ skill.description || skill.name }}
+              <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+            </div>
           </div>
         </div>
       </div>

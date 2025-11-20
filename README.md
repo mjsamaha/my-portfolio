@@ -4,6 +4,8 @@ A modern, responsive portfolio showcasing my development expertise and diverse p
 
 <img width="1249" height="920" alt="initial_capture" src="https://github.com/user-attachments/assets/1f8b6389-a848-45de-bb8c-c3ba32c4ac90" />
 
+- [ ] TODO: Fix icons
+
 
 ## ✨ Key Features
 

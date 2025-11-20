@@ -1,1 +1,94 @@
 /* Custom styles for Skills component */
+
+/* Skill Card Animations */
+.skill-card {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.skill-card:nth-child(1) { animation-delay: 0.1s; }
+.skill-card:nth-child(2) { animation-delay: 0.2s; }
+.skill-card:nth-child(3) { animation-delay: 0.3s; }
+.skill-card:nth-child(4) { animation-delay: 0.4s; }
+.skill-card:nth-child(5) { animation-delay: 0.5s; }
+.skill-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon Styling */
+.skill-card svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover svg {
+  transform: scale(1.1);
+}
+
+/* Tooltip Styling */
+.tooltip {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure icons are properly sized */
+.skill-card [innerHTML] svg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* Category Card Stagger Animation */
+.grid > div {
+  animation: fadeInScale 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.grid > div:nth-child(1) { animation-delay: 0.1s; }
+.grid > div:nth-child(2) { animation-delay: 0.2s; }
+.grid > div:nth-child(3) { animation-delay: 0.3s; }
+.grid > div:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skill-card {
+    padding: 0.75rem;
+  }
+  
+  .skill-card svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Enhanced hover effects */
+.skill-card:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Icon container adjustments */
+.skill-card > div[innerHTML] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
