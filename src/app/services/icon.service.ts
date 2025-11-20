@@ -1,22 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as simpleIcons from 'simple-icons';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { 
-  FaHtml5, 
-  FaAngular, 
-  FaNodeJs, 
-  FaDocker, 
-  FaGitAlt 
-} from 'react-icons/fa';
-import { 
-  SiTailwindcss, 
-  SiThymeleaf, 
-  SiExpress, 
-  SiSpringboot, 
-  SiMongodb, 
-  SiPostgresql
-} from 'react-icons/si';
+import { iconData as iconDataMap } from './icon-data';
 
 export interface IconData {
   svg: string;
@@ -30,36 +13,35 @@ export interface IconData {
 export class IconService {
   private iconCache: Map<string, IconData> = new Map();
 
-  // Mapping technology names to React Icons components and brand colors
-  // For icons not available in React Icons, we'll use simple-icons as fallback
-  private iconMap: { [key: string]: { icon?: any; simpleIconSlug?: string; color: string; useSimpleIcon?: boolean } } = {
+  // Mapping technology names to simple-icons slugs and brand colors
+  private iconMap: { [key: string]: { simpleIconSlug: string; color: string } } = {
     // Frontend
-    'HTML': { icon: FaHtml5, color: '#E34F26' },
-    'HTML5': { icon: FaHtml5, color: '#E34F26' },
-    'Angular': { icon: FaAngular, color: '#DD0031' },
-    'Tailwind CSS': { icon: SiTailwindcss, color: '#06B6D4' },
-    'Tailwind': { icon: SiTailwindcss, color: '#06B6D4' },
-    'Thymeleaf': { icon: SiThymeleaf, color: '#005F0F' },
+    'HTML': { simpleIconSlug: 'html5', color: '#E34F26' },
+    'HTML5': { simpleIconSlug: 'html5', color: '#E34F26' },
+    'Angular': { simpleIconSlug: 'angular', color: '#DD0031' },
+    'Tailwind CSS': { simpleIconSlug: 'tailwindcss', color: '#06B6D4' },
+    'Tailwind': { simpleIconSlug: 'tailwindcss', color: '#06B6D4' },
+    'Thymeleaf': { simpleIconSlug: 'thymeleaf', color: '#005F0F' },
 
     // Backend
-    'NodeJS': { icon: FaNodeJs, color: '#339933' },
-    'Node.js': { icon: FaNodeJs, color: '#339933' },
-    'Express': { icon: SiExpress, color: '#000000' },
-    'Spring Boot': { icon: SiSpringboot, color: '#6DB33F' },
-    'Spring': { icon: SiSpringboot, color: '#6DB33F' },
+    'NodeJS': { simpleIconSlug: 'nodedotjs', color: '#339933' },
+    'Node.js': { simpleIconSlug: 'nodedotjs', color: '#339933' },
+    'Express': { simpleIconSlug: 'express', color: '#000000' },
+    'Spring Boot': { simpleIconSlug: 'spring', color: '#6DB33F' },
+    'Spring': { simpleIconSlug: 'spring', color: '#6DB33F' },
 
     // Database
-    'MongoDB': { icon: SiMongodb, color: '#47A248' },
-    'PostgreSQL': { icon: SiPostgresql, color: '#4169E1' },
-    'H2-Console': { simpleIconSlug: 'h2database', color: '#1BA37A', useSimpleIcon: true },
-    'H2-console': { simpleIconSlug: 'h2database', color: '#1BA37A', useSimpleIcon: true },
-    'H2': { simpleIconSlug: 'h2database', color: '#1BA37A', useSimpleIcon: true },
+    'MongoDB': { simpleIconSlug: 'mongodb', color: '#47A248' },
+    'PostgreSQL': { simpleIconSlug: 'postgresql', color: '#4169E1' },
+    'H2-Console': { simpleIconSlug: 'h2database', color: '#1BA37A' },
+    'H2-console': { simpleIconSlug: 'h2database', color: '#1BA37A' },
+    'H2': { simpleIconSlug: 'h2database', color: '#1BA37A' },
 
     // Tools
-    'Git': { icon: FaGitAlt, color: '#F05032' },
-    'Docker': { icon: FaDocker, color: '#2496ED' },
-    'LibGDX': { simpleIconSlug: 'libgdx', color: '#E74C3C', useSimpleIcon: true },
-    'JavaFX': { simpleIconSlug: 'javafx', color: '#ED8B00', useSimpleIcon: true }
+    'Git': { simpleIconSlug: 'git', color: '#F05032' },
+    'Docker': { simpleIconSlug: 'docker', color: '#2496ED' },
+    'LibGDX': { simpleIconSlug: 'libgdx', color: '#E74C3C' },
+    'JavaFX': { simpleIconSlug: 'javafx', color: '#ED8B00' }
   };
 
   /**
@@ -78,36 +60,35 @@ export class IconService {
 
     let iconData: IconData;
 
-    if (iconInfo) {
-      // Check if we should use simple-icons (for icons not in React Icons)
-      if (iconInfo.useSimpleIcon && iconInfo.simpleIconSlug) {
-        try {
-          const simpleIcon = (simpleIcons as any)[iconInfo.simpleIconSlug];
-          if (simpleIcon && simpleIcon.svg) {
-            const svg = simpleIcon.svg.replace(/fill="#[^"]*"/g, `fill="${iconInfo.color}"`)
-                                      .replace(/fill='#[^']*'/g, `fill="${iconInfo.color}"`);
-            iconData = {
-              svg: svg,
-              color: iconInfo.color,
-              title: techName
-            };
-          } else {
-            iconData = this.createPlaceholderSvg(iconInfo.color, techName);
+    if (iconInfo && iconInfo.simpleIconSlug) {
+      try {
+        const simpleIcon = iconDataMap[iconInfo.simpleIconSlug];
+        
+        if (simpleIcon && simpleIcon.svg) {
+          // Replace fill colors in the SVG with our brand color
+          // simple-icons SVGs typically have a fill attribute we need to replace
+          let svg = simpleIcon.svg;
+          
+          // Replace any existing fill colors with our brand color
+          svg = svg.replace(/fill="#[^"]*"/g, `fill="${iconInfo.color}"`)
+                   .replace(/fill='#[^']*'/g, `fill="${iconInfo.color}"`);
+          
+          // If no fill attribute exists, add it to the root svg element
+          if (!svg.includes('fill=')) {
+            svg = svg.replace(/<svg/, `<svg fill="${iconInfo.color}"`);
           }
-        } catch (error) {
-          console.warn(`Error extracting simple-icon for ${techName}:`, error);
+          
+          iconData = {
+            svg: svg,
+            color: iconInfo.color,
+            title: techName
+          };
+        } else {
           iconData = this.createPlaceholderSvg(iconInfo.color, techName);
         }
-      } else if (iconInfo.icon) {
-        // Use React Icons
-        try {
-          iconData = this.extractSvgFromReactIcon(iconInfo.icon, iconInfo.color, techName);
-        } catch (error) {
-          console.warn(`Error extracting icon for ${techName}:`, error);
-          iconData = this.createPlaceholderSvg(iconInfo.color, techName);
-        }
-      } else {
-        iconData = this.createPlaceholderSvg(iconInfo.color, techName);
+      } catch (error) {
+        console.warn(`Error extracting simple-icon for ${techName}:`, error);
+        iconData = this.createPlaceholderSvg(iconInfo.color || '#6B7280', techName);
       }
     } else {
       // Fallback to generic icon for unmapped technologies
@@ -117,39 +98,6 @@ export class IconService {
     // Cache the result
     this.iconCache.set(techName, iconData);
     return iconData;
-  }
-
-  /**
-   * Extract SVG from React Icon component using react-dom/server
-   * This renders the React component to a string and extracts the SVG
-   */
-  private extractSvgFromReactIcon(iconComponent: any, color: string, title: string): IconData {
-    try {
-      // Render the React Icon component to a string
-      const iconElement = React.createElement(iconComponent, { 
-        color: color,
-        size: '1em',
-        style: { color: color }
-      });
-      const svgString = ReactDOMServer.renderToStaticMarkup(iconElement);
-      
-      // Extract and modify the SVG to ensure proper color
-      // React Icons might use currentColor, so we'll replace it with the actual color
-      const coloredSvg = svgString
-        .replace(/fill="currentColor"/g, `fill="${color}"`)
-        .replace(/fill='currentColor'/g, `fill="${color}"`)
-        .replace(/stroke="currentColor"/g, `stroke="${color}"`)
-        .replace(/stroke='currentColor'/g, `stroke="${color}"`);
-      
-      return {
-        svg: coloredSvg,
-        color: color,
-        title: title
-      };
-    } catch (error) {
-      console.warn('Failed to extract SVG from React Icon:', error);
-      return this.createPlaceholderSvg(color, title);
-    }
   }
 
   /**
