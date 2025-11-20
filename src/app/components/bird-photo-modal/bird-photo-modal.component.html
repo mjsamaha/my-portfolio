@@ -1,0 +1,63 @@
+<!-- Full-Screen Modal Lightbox -->
+<div *ngIf="isOpen && currentPhoto"
+     class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity duration-300 modal-enter"
+     (click)="onClose()">
+
+  <!-- Close Button (Top Right) -->
+  <button (click)="onClose(); $event.stopPropagation()"
+          class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-200 backdrop-blur-sm z-20 flex items-center justify-center">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <!-- Navigation Button Left -->
+  <button *ngIf="showNavigation"
+          (click)="onPrevious(); $event.stopPropagation()"
+          class="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-200 backdrop-blur-sm z-20 flex items-center justify-center">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+
+  <!-- Navigation Button Right -->
+  <button *ngIf="showNavigation"
+          (click)="onNext(); $event.stopPropagation()"
+          class="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all duration-200 backdrop-blur-sm z-20 flex items-center justify-center">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <!-- Image Container -->
+  <div class="relative w-full h-full flex items-center justify-center p-4 md:p-8" (click)="$event.stopPropagation()">
+    <!-- Image Counter (Top Left) -->
+    <div *ngIf="showNavigation" class="absolute top-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm z-10">
+      {{ currentIndex + 1 }} / {{ photos.length }}
+    </div>
+
+    <!-- Main Image -->
+    <img [src]="getImagePath(currentPhoto.filename)"
+         [alt]="currentPhoto.commonName"
+         class="max-w-full max-h-[85vh] object-contain transition-opacity duration-200 modal-image-transition modal-image-enter"
+         (error)="onImageError($event)">
+
+    <!-- Metadata Overlay (Bottom) -->
+    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent p-6 md:p-8 text-white modal-metadata-enter">
+      <h3 class="text-2xl md:text-3xl font-bold mb-2">
+        {{ currentPhoto.commonName }}
+      </h3>
+      <p class="text-base md:text-lg text-white/80 italic mb-3">
+        {{ currentPhoto.scientificName }}
+      </p>
+      <div class="flex items-center text-sm md:text-base text-white/70">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span>{{ currentPhoto.location }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+

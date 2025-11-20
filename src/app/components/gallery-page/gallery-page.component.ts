@@ -1,21 +1,14 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
+import { BirdPhotoModalComponent, BirdPhoto } from '../bird-photo-modal/bird-photo-modal.component';
 import { getImagePath } from '../../utils/image.utils';
-
-interface BirdPhoto {
-  filename: string;
-  commonName: string;
-  scientificName: string;
-  location: string;
-  description?: string;
-}
 
 @Component({
   selector: 'app-gallery-page',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, BirdPhotoModalComponent],
   templateUrl: './gallery-page.component.html',
   styleUrl: './gallery-page.component.css'
 })
@@ -131,12 +124,10 @@ export class GalleryPageComponent {
   openModal(index: number): void {
     this.modalImageIndex = index;
     this.isModalOpen = true;
-    document.body.style.overflow = 'hidden';
   }
 
   closeModal(): void {
     this.isModalOpen = false;
-    document.body.style.overflow = '';
   }
 
   // Modal navigation
@@ -146,27 +137,6 @@ export class GalleryPageComponent {
 
   nextModalImage(): void {
     this.modalImageIndex = (this.modalImageIndex + 1) % this.birdPhotos.length;
-  }
-
-  // Keyboard navigation for modal
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent): void {
-    if (!this.isModalOpen) return;
-
-    switch (event.key) {
-      case 'ArrowLeft':
-        event.preventDefault();
-        this.prevModalImage();
-        break;
-      case 'ArrowRight':
-        event.preventDefault();
-        this.nextModalImage();
-        break;
-      case 'Escape':
-        event.preventDefault();
-        this.closeModal();
-        break;
-    }
   }
 }
 

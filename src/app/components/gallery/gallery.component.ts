@@ -1,18 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface BirdPhoto {
-  filename: string;
-  commonName: string;
-  scientificName: string;
-  location: string;
-  description?: string;
-}
+import { BirdPhotoModalComponent, BirdPhoto } from '../bird-photo-modal/bird-photo-modal.component';
 
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BirdPhotoModalComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
 })
@@ -89,12 +82,10 @@ export class GalleryComponent {
   openModal(index: number): void {
     this.modalImageIndex = index;
     this.isModalOpen = true;
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
   }
 
   closeModal(): void {
     this.isModalOpen = false;
-    document.body.style.overflow = ''; // Restore scrolling
   }
 
   // Modal navigation
@@ -104,26 +95,5 @@ export class GalleryComponent {
 
   nextModalImage(): void {
     this.modalImageIndex = (this.modalImageIndex + 1) % this.birdPhotos.length;
-  }
-
-  // Keyboard navigation for modal
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent): void {
-    if (!this.isModalOpen) return;
-
-    switch (event.key) {
-      case 'ArrowLeft':
-        event.preventDefault();
-        this.prevModalImage();
-        break;
-      case 'ArrowRight':
-        event.preventDefault();
-        this.nextModalImage();
-        break;
-      case 'Escape':
-        event.preventDefault();
-        this.closeModal();
-        break;
-    }
   }
 }
