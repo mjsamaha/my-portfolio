@@ -3,7 +3,7 @@
     "source": "functions"
   },
   "hosting": {
-    "public": "dist",
+    "public": "dist/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

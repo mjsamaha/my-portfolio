@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run check:secrets
+# Run the secrets check directly with node to avoid `npm` resolution issues on Git Bash/Windows
+if [ -x "$(command -v node)" ]; then
+	node "$(dirname "$0")/../scripts/check-secrets.js"
+else
+	npm run check:secrets
+fi
