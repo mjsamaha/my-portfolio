@@ -13,7 +13,7 @@
     <div *ngIf="skills$ | async as skills; else loading" class="space-y-16">
       <!-- Main Skill Categories -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div *ngFor="let category of skills; trackBy: trackByCategory" 
+        <div *ngFor="let category of skills; trackBy: trackByCategory"
              class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group">
           <!-- Category Header -->
           <div class="mb-6">
@@ -43,7 +43,7 @@
               </div>
               <!-- Skill Name -->
               <span class="text-xs font-medium {{ category.colorScheme.text }} block">{{ skill.name }}</span>
-              
+
               <!-- Tooltip -->
               <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 invisible group-hover/skill:opacity-100 group-hover/skill:visible transition-all duration-200 whitespace-nowrap z-10 pointer-events-none">
                 {{ skill.description || skill.name }}
@@ -55,7 +55,7 @@
       </div>
 
       <!-- Other Technologies & Methods -->
-      <div *ngIf="otherTechnologies$ | async as otherTech" 
+      <div *ngIf="otherTechnologies$ | async as otherTech"
            class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">Other Technologies & Methods</h3>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -70,7 +70,7 @@
             <span class="text-sm font-medium text-gray-800 block mb-1">{{ skill.name }}</span>
             <!-- Description -->
             <div class="text-xs text-gray-600">{{ skill.description }}</div>
-            
+
             <!-- Tooltip -->
             <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 invisible group-hover/skill:opacity-100 group-hover/skill:visible transition-all duration-200 whitespace-nowrap z-10 pointer-events-none">
               {{ skill.description || skill.name }}

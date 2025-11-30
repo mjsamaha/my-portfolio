@@ -42,6 +42,9 @@ export class IconService {
     'Docker': { simpleIconSlug: 'docker', color: '#2496ED' },
     'LibGDX': { simpleIconSlug: 'libgdx', color: '#E74C3C' },
     'JavaFX': { simpleIconSlug: 'javafx', color: '#ED8B00' }
+    ,
+    // Project management / tools (use image assets when available)
+    'Linear': { simpleIconSlug: '', color: '#000000', /* imagePath: '/assets/images/skills/linear.jfif' */ }
   };
 
   /**
@@ -60,24 +63,36 @@ export class IconService {
 
     let iconData: IconData;
 
-    if (iconInfo && iconInfo.simpleIconSlug) {
+    // If an image asset is available for this tech, prefer embedding it inside an SVG wrapper
+    // We allow empty simpleIconSlug entries and rely on image assets in `/assets/images/skills`.
+    if (iconInfo && iconInfo.simpleIconSlug === '' ) {
+      // derive an expected image path from the tech name if present in assets
+      try {
+        const filename = techName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const imagePath = `/assets/images/skills/${filename}.jfif`;
+        const svg = `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>${techName}</title><image href="${imagePath}" width="24" height="24" preserveAspectRatio="xMidYMid meet"/></svg>`;
+        iconData = { svg, color: iconInfo.color || '#6B7280', title: techName };
+      } catch (err) {
+        iconData = this.createPlaceholderSvg(iconInfo.color || '#6B7280', techName);
+      }
+    } else if (iconInfo && iconInfo.simpleIconSlug) {
       try {
         const simpleIcon = iconDataMap[iconInfo.simpleIconSlug];
-        
+
         if (simpleIcon && simpleIcon.svg) {
           // Replace fill colors in the SVG with our brand color
           // simple-icons SVGs typically have a fill attribute we need to replace
           let svg = simpleIcon.svg;
-          
+
           // Replace any existing fill colors with our brand color
           svg = svg.replace(/fill="#[^"]*"/g, `fill="${iconInfo.color}"`)
                    .replace(/fill='#[^']*'/g, `fill="${iconInfo.color}"`);
-          
+
           // If no fill attribute exists, add it to the root svg element
           if (!svg.includes('fill=')) {
             svg = svg.replace(/<svg/, `<svg fill="${iconInfo.color}"`);
           }
-          
+
           iconData = {
             svg: svg,
             color: iconInfo.color,

@@ -26,7 +26,9 @@
     "category": "Tools & Others",
     "skills": [
       { "name": "Docker", "level": 75, "description": "Containerization for consistent deployments" },
-      { "name": "Git", "level": 90, "description": "Version control and collaborative development" }
+      { "name": "Git", "level": 90, "description": "Version control and collaborative development" },
+      { "name": "Linear", "level": 80, "description": "Roadmap planning and streamlined issue workflows; complements PMP-driven project planning and tracking." }
+
     ]
   }
 ]
