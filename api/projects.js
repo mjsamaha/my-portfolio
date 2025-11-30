@@ -4,3 +4,5 @@ const projects = require(path.join(process.cwd(), 'dist/assets/data/projects.jso
 export default function handler(req, res) {
   res.status(200).json(projects);
 }
+
+

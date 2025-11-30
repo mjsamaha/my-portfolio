@@ -1,0 +1,10 @@
+# netlify.toml disabled during migration to Firebase Hosting
+# Original contents archived here for reference.
+
+[build]
+  publish = "dist/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
