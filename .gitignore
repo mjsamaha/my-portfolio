@@ -38,6 +38,14 @@ testem.log
 /typings
 __screenshots__/
 
+# Local Firebase secret override (do NOT commit your real keys)
+src/environments/firebase.config.local.ts
+src/environments/firebase.config.ts
+
+# Service account keys
+serviceAccountKey.json
+firebase-debug.log
+
 # System files
 .DS_Store
 Thumbs.db
