@@ -55,3 +55,5 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MSAMAHA_PORTFOLIO }}
           projectId: msamaha-portfolio
+          # Deploy to a preview channel named for the PR to avoid requiring an explicit channel
+          channelId: pr-${{ github.event.pull_request.number }}
