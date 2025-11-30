@@ -1,12 +1,13 @@
 [
   {
     "id": 1,
-    "title": "Cadet Inventory Management System",
-    "description": "This is still in research/planning, but to streamline cadet supply inventory processes.",
-    "technologies": ["ExpressJS", "Angular", "PostgreSQL"],
-    "link": "https://github.com/mjsamaha/projects/wiki/Cadet-Inventory-Management-System",
-    "thumbnail": "/assets/images/project1.jpg",
-    "status": "Planning",
-    "category": "Logistics System"
+    "title": "Signals Master",
+    "description": "A web application crafted for cadets, military personnel, and enthusiasts to learn and practice signal communication.",
+    "technologies": ["Ionic", "Angular", "Firebase"],
+    "link": "https://signalsmaster-40d2f.web.app/tabs/home",
+    "source": "https://github.com/mjsamaha/SignalsMaster",
+    "thumbnail": "/assets/images/projects/GitHub_GlobalRanking.png",
+    "status": "In-Development",
+    "category": "Interactive Learning Tool"
   }
 ]
