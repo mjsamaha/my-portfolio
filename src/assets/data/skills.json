@@ -18,8 +18,9 @@
   {
     "category": "Database",
     "skills": [
-      { "name": "MongoDB", "level": 80, "description": "NoSQL document database for flexible data storage" },
-      { "name": "PostgreSQL", "level": 75, "description": "Advanced open-source relational database" }
+      { "name": "MongoDB", "level": 70, "description": "NoSQL document database for flexible data storage" },
+      { "name": "PostgreSQL", "level": 75, "description": "Advanced open-source relational database" },
+      { "name": "H2-Database", "level": 65, "description": "Lightweight Java SQL database for development and testing" }
     ]
   },
   {
@@ -27,7 +28,7 @@
     "skills": [
       { "name": "Docker", "level": 75, "description": "Containerization for consistent deployments" },
       { "name": "Git", "level": 90, "description": "Version control and collaborative development" },
-      { "name": "Linear", "level": 80, "description": "Roadmap planning and streamlined issue workflows; complements PMP-driven project planning and tracking." }
+      { "name": "Linear", "level": 80, "description": "Project planning and streamlined issue workflows; complements PMP-driven project planning and tracking." }
 
     ]
   }

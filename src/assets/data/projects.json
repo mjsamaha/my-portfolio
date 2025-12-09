@@ -9,5 +9,16 @@
     "thumbnail": "/assets/images/projects/GitHub_GlobalRanking.png",
     "status": "In-Development",
     "category": "Interactive Learning Tool"
+  },
+   {
+    "id": 1,
+    "title": "DevLog",
+    "description": "My own custom development log journal. Meant to track and document my coding progress and projects, through blog posts.",
+    "technologies": ["Spring Boot", "H2-Database", "Angular"],
+    "link": "",
+    "source": "",
+    "thumbnail": "",
+    "status": "In-Development",
+    "category": "Personal Tool"
   }
 ]
