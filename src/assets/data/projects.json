@@ -8,7 +8,8 @@
     "source": "https://github.com/mjsamaha/SignalsMaster",
     "thumbnail": "/assets/images/projects/GitHub_GlobalRanking.png",
     "status": "In-Development",
-    "category": "Interactive Learning Tool"
+    "category": "Interactive Learning Tool",
+    "year": "2025"
   },
    {
     "id": 2,
@@ -19,7 +20,8 @@
     "source": "",
     "thumbnail": "",
     "status": "In-Development",
-    "category": "Personal Tool"
+    "category": "Personal Tool",
+    "year": "2025"
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "source": "",
     "thumbnail": "",
     "status": "Planning",
-    "category": "Enterprise Application"
+    "category": "Enterprise Application",
+    "year": "2025"
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "source": "",
     "thumbnail": "",
     "status": "Planning",
-    "category": "Environmental Monitoring System"
+    "category": "Environmental Monitoring System",
+    "year": "2025"
   }
 
 ]

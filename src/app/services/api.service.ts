@@ -13,6 +13,7 @@ export interface Project {
   thumbnail: string;
   status: string;
   category: string;
+  year: string;
 }
 
 export interface SkillCategory {
