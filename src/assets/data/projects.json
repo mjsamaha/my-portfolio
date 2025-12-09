@@ -11,7 +11,7 @@
     "category": "Interactive Learning Tool"
   },
    {
-    "id": 1,
+    "id": 2,
     "title": "DevLog",
     "description": "My own custom development log journal. Meant to track and document my coding progress and projects, through blog posts.",
     "technologies": ["Spring Boot", "H2-Database", "Angular"],
@@ -20,5 +20,28 @@
     "thumbnail": "",
     "status": "In-Development",
     "category": "Personal Tool"
+  },
+  {
+    "id": 3,
+    "title": "Cadet Inventory Management System",
+    "description": "A professional, enterprise-style web application designed to manage inventory, loan requests, and logistics for a cadet organization. Provides a structured, multi-role access model to ensure efficient operations.",
+    "technologies": ["Spring Boot", "H2-Database", "Angular", "PrimeNG", "Tailwind CSS"],
+    "link": "",
+    "source": "",
+    "thumbnail": "",
+    "status": "Planning",
+    "category": "Enterprise Application"
+  },
+  {
+    "id": 4,
+    "title": "Ember Watch",
+    "description": "A comprehensive wildfire monitoring and alert system designed to collect and centralize real-time environmental data from remote fire-watch towers.",
+    "technologies": ["Spring Boot", "H2-Database", "Angular"],
+    "link": "",
+    "source": "",
+    "thumbnail": "",
+    "status": "Planning",
+    "category": "Environmental Monitoring System"
   }
+
 ]
