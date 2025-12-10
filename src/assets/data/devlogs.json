@@ -5,8 +5,8 @@
       "title": "Signals Master",
       "summary": "A web application for cadets, military personnel, and enthusiasts to hone on their signal flags knowledge.",
       "detailedSummary": "Signals Master is an interactive learning platform designed to help cadets, military personnel, and signal communication enthusiasts master the art of flag semaphore and other signal systems. Built with Ionic and Angular, the app provides an immersive training experience with real-time feedback, progress tracking, and comprehensive learning modules. Deployed on Firebase for reliable hosting and real-time data synchronization.",
-      "startDate": "2024-11-22",
-      "expectedEndDate": "2025-01-04",
+      "startDate": "2025-11-22",
+      "expectedEndDate": "2026-01-04",
       "status": "in-progress",
       "technologies": [
         "Ionic",
