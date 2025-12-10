@@ -1,0 +1,203 @@
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Breadcrumb Navigation -->
+    <nav class="mb-6 flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+      <button
+        (click)="router.navigate(['/'])"
+        class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        Home
+      </button>
+      <span>/</span>
+      <span class="text-gray-900 dark:text-white font-medium">DevLogs</span>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Development Logs</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Follow the journey of my projects through detailed development logs and updates.
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="flex justify-center items-center h-64">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !isLoading" class="text-center py-12">
+      <p class="text-red-600 dark:text-red-400 text-lg">{{ error }}</p>
+      <button
+        (click)="loadProjects()"
+        class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        Try Again
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!isLoading && !error" class="space-y-8">
+      <!-- Filters and Search -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Search -->
+          <div class="lg:col-span-2">
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Search Projects
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                [value]="searchQuery"
+                (input)="setSearchQuery($any($event.target).value)"
+                placeholder="Search by title, description, or technology..."
+                class="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+              <svg class="absolute left-3 top-3 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Status Filter -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Status
+            </label>
+            <select
+              [value]="selectedStatus"
+              (change)="setStatusFilter($any($event.target).value)"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+              <option *ngFor="let option of statusOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sort and Results Count -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mt-6">
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Sort by:</span>
+            <button
+              (click)="setSortBy('recent')"
+              [class]="'px-3 py-1 rounded-lg text-sm font-medium transition-colors ' +
+                       (sortBy === 'recent' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600')">
+              Recent
+            </button>
+            <button
+              (click)="setSortBy('title')"
+              [class]="'px-3 py-1 rounded-lg text-sm font-medium transition-colors ' +
+                       (sortBy === 'title' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600')">
+              Title
+            </button>
+            <button
+              (click)="setSortBy('posts')"
+              [class]="'px-3 py-1 rounded-lg text-sm font-medium transition-colors ' +
+                       (sortBy === 'posts' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600')">
+              Posts
+            </button>
+          </div>          <div class="flex items-center gap-4">
+            <span class="text-sm text-gray-600 dark:text-gray-400">
+              {{ filteredProjects.length }} {{ filteredProjects.length === 1 ? 'project' : 'projects' }}
+            </span>
+            <button
+              *ngIf="selectedStatus !== 'all' || searchQuery"
+              (click)="clearFilters()"
+              class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium">
+              Clear Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div *ngIf="filteredProjects.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          *ngFor="let project of filteredProjects"
+          class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+          (click)="navigateToDevlog(project.id)">
+
+          <!-- Project Header -->
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-3">
+              <h2 class="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {{ project.title }}
+              </h2>
+              <span [class]="'px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ml-2 ' + getStatusBadgeClass(project.status)">
+                {{ getStatusLabel(project.status) }}
+              </span>
+            </div>
+
+            <!-- Summary -->
+            <p class="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
+              {{ project.summary }}
+            </p>
+
+            <!-- Metadata -->
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <span>{{ project.postCount }} {{ project.postCount === 1 ? 'post' : 'posts' }}</span>
+              </div>
+
+              <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Latest: {{ getRelativeTime(project.latestPostDate) }}</span>
+              </div>
+
+              <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span>Started {{ formatDate(project.startDate, 'short') }}</span>
+              </div>
+            </div>
+
+            <!-- Technologies -->
+            <div class="flex flex-wrap gap-2">
+              <span
+                *ngFor="let tech of project.technologies.slice(0, 3)"
+                class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs font-medium">
+                {{ tech }}
+              </span>
+              <span
+                *ngIf="project.technologies.length > 3"
+                class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-xs font-medium">
+                +{{ project.technologies.length - 3 }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="px-6 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <button class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-sm flex items-center">
+              View DevLog
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Results -->
+      <div *ngIf="filteredProjects.length === 0" class="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+        <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <p class="text-gray-500 dark:text-gray-400 text-lg mb-4">No projects found matching your criteria.</p>
+        <button
+          (click)="clearFilters()"
+          class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

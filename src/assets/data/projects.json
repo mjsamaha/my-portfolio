@@ -2,25 +2,13 @@
   {
     "id": 1,
     "title": "Signals Master",
-    "description": "A web application crafted for cadets, military personnel, and enthusiasts to learn and practice signal communication.",
+    "description": "A cadet training and examination platform for mastering international signal pennants. Features progression tracking, study materials, formal exams with 80% pass threshold, and admin oversight for evaluation and record-keeping.",
     "technologies": ["Ionic", "Angular", "Firebase"],
     "link": "https://signalsmaster-40d2f.web.app/tabs/home",
     "source": "https://github.com/mjsamaha/SignalsMaster",
     "thumbnail": "/assets/images/projects/GitHub_GlobalRanking.png",
     "status": "In-Development",
     "category": "Interactive Learning Tool",
-    "year": "2025"
-  },
-   {
-    "id": 2,
-    "title": "DevLog",
-    "description": "My own custom development log journal. Meant to track and document my coding progress and projects, through blog posts.",
-    "technologies": ["Spring Boot", "H2-Database", "Angular"],
-    "link": "",
-    "source": "",
-    "thumbnail": "",
-    "status": "In-Development",
-    "category": "Personal Tool",
     "year": "2025"
   },
   {
@@ -34,18 +22,5 @@
     "status": "Planning",
     "category": "Enterprise Application",
     "year": "2025"
-  },
-  {
-    "id": 4,
-    "title": "Ember Watch",
-    "description": "A comprehensive wildfire monitoring and alert system designed to collect and centralize real-time environmental data from remote fire-watch towers.",
-    "technologies": ["Spring Boot", "H2-Database", "Angular"],
-    "link": "",
-    "source": "",
-    "thumbnail": "",
-    "status": "Planning",
-    "category": "Environmental Monitoring System",
-    "year": "2025"
   }
-
 ]

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ApiService, Project } from '../../services/api.service';
+import { DevlogService } from '../../services/devlog.service';
 import { Observable, BehaviorSubject, map, startWith, combineLatest } from 'rxjs';
 
 @Component({
@@ -13,6 +15,7 @@ import { Observable, BehaviorSubject, map, startWith, combineLatest } from 'rxjs
 export class ProjectsComponent implements OnInit {
   projects$: Observable<Project[]> | undefined;
   filteredProjects$: Observable<Project[]> | undefined;
+  projectDevLogStatus = new Map<string, boolean>();
 
   private filterSubject = new BehaviorSubject<string>('All');
   filter$ = this.filterSubject.asObservable();
@@ -25,7 +28,11 @@ export class ProjectsComponent implements OnInit {
     { label: 'Completed', value: 'Completed', color: 'bg-green-100 text-green-800 hover:bg-green-200' }
   ];
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private devlogService: DevlogService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.projects$ = this.apiService.getProjects();
@@ -36,12 +43,33 @@ export class ProjectsComponent implements OnInit {
       this.filter$.pipe(startWith('All'))
     ]).pipe(
       map(([projects, filter]) => {
+        // Check DevLog status for each project
+        projects.forEach(project => {
+          this.checkDevLogStatus(project.id.toString());
+        });
+
         if (filter === 'All') {
           return projects;
         }
         return projects.filter(project => project.status === filter);
       })
     );
+  }
+
+  private checkDevLogStatus(projectId: string): void {
+    this.devlogService.hasDevLog(projectId).subscribe(hasDevLog => {
+      this.projectDevLogStatus.set(projectId, hasDevLog);
+    });
+  }
+
+  hasDevLog(projectId: number): boolean {
+    return this.projectDevLogStatus.get(projectId.toString()) || false;
+  }
+
+  navigateToDevLog(projectId: number, event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.router.navigate(['/projects', projectId.toString(), 'devlog']);
   }
 
   setFilter(filter: string): void {
