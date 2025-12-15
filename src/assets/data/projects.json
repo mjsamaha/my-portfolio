@@ -12,18 +12,6 @@
     "year": "2025"
   },{
     "id": 2,
-    "title": "Jame Game Christmas Edition",
-    "description": "A beginner-friendly game jam (Christmas) edition -- Not sure what I want to make, but the theme will be given out on December 17, and I'll have until December 24, 2025 to submit my entry!.",
-    "technologies": ["LibGDX"],
-    "link": "https://itch.io/jam/jame-gam-christmas-edition",
-    "source": "",
-    "thumbnail": "",
-    "status": "Planning",
-    "category": "2D Game",
-    "year": "2025"
-  },
-  {
-    "id": 3,
     "title": "Cadet Inventory Management System",
     "description": "A professional, enterprise-style web application designed to manage inventory, loan requests, and logistics for a cadet organization. Provides a structured, multi-role access model to ensure efficient operations.",
     "technologies": ["Spring Boot", "H2-Database", "Angular", "PrimeNG", "Tailwind CSS"],
@@ -33,5 +21,18 @@
     "status": "Planning",
     "category": "Enterprise Application",
     "year": "2025"
+  },
+  {
+    "id": 3,
+    "title": "Jame Game Christmas Edition",
+    "description": "A beginner-friendly game jam (Christmas) edition -- Not sure what I want to make, but the theme will be given out on December 17, and I'll have until December 24, 2025 to submit my entry!.",
+    "technologies": ["LibGDX"],
+    "link": "https://itch.io/jam/jame-gam-christmas-edition",
+    "source": "",
+    "thumbnail": "",
+    "status": "Planning",
+    "category": "2D Game",
+    "year": "2025"
   }
 ]
+

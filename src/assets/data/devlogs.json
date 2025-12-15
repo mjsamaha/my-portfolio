@@ -78,6 +78,34 @@
       "repository": "",
       "liveUrl": "",
       "devlogPosts": []
+    },
+    {
+      "id": "3",
+      "title": "Jame Game Christmas Edition",
+      "summary": "A beginner-friendly game jam (Christmas) edition -- Not sure what I want to make, but the theme will be given out on December 17, and I'll have until December 24, 2025 to submit my entry!.",
+      "detailedSummary": "A beginner-friendly game jam (Christmas) edition -- Not sure what I want to make, but the theme will be given out on December 17, and I'll have until December 24, 2025 to submit my entry!.",
+      "startDate": "2025-12-17",
+      "expectedEndDate": "2025-12-24",
+      "status": "planning",
+      "technologies": [
+        "LibGDX"
+      ],
+      "repository": "",
+      "liveUrl": "https://itch.io/jam/jame-gam-christmas-edition",
+      "devlogPosts": [
+        {
+          "id": "boilerplate-setup",
+          "title": "Pre-Game Jam: Boilerplate Setup & Initial Planning",
+          "date": "2025-12-15",
+          "excerpt": "Getting things setup.",
+            "content": "Pre-Game Jam: Boilerplate Setup & Initial Planning\n\nWith the Jame Game Christmas Edition kicking off in just a couple of days, I decided to get a head start by preparing my boilerplate code and outlining a rough plan of attack. Since this is my first game jam, the goal is simple: reduce friction, avoid overengineering, and actually finish a game.\n\nBoilerplate Setup:\n- Created a fresh LibGDX project using the official setup tool.\n- Configured Gradle for painless builds and dependency management.\n- Initialized a Git repository to track progress, experiments...\n\nInitial Planning:\n- The theme hasn’t been revealed yet, but I’ve already set up my go-to project structure.\n- I’m using an object-oriented, screen-based architecture, starting with a simple Constants.java file for shared values and utilities.\n- Implemented basic screen management with an abstract BaseScreen, along with SplashScreen, MainMenuScreen, and GameScreen.\n- For now, I’m sticking with LibGDX’s BitmapFont for text rendering—functional, fast, and good enough until polish time.\n\nThis setup gives me a flexible foundation so once the theme drops, I can focus entirely on gameplay instead of wrestling with architecture.\n\nNext Steps:\n- Wait for the theme reveal.\n- Lock in a game concept as quickly as possible.\n- Start prototyping core mechanics immediately.\n\nIf all goes well, I’ll post an update around December 17 detailing what direction the game took—and how many ideas were bravely abandoned along the way.",
+          "tags": [
+            "planning"
+          ],
+          "status": "published",
+          "images": []
+        }
+      ]
     }
   ]
 }
