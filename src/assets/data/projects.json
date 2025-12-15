@@ -10,6 +10,17 @@
     "status": "In-Development",
     "category": "Interactive Learning Tool",
     "year": "2025"
+  },{
+    "id": 2,
+    "title": "Jame Game Christmas Edition",
+    "description": "A beginner-friendly game jam (Christmas) edition -- Not sure what I want to make, but the theme will be given out on December 17, and I'll have until December 24, 2025 to submit my entry!.",
+    "technologies": ["LibGDX"],
+    "link": "https://itch.io/jam/jame-gam-christmas-edition",
+    "source": "",
+    "thumbnail": "",
+    "status": "Planning",
+    "category": "2D Game",
+    "year": "2025"
   },
   {
     "id": 3,
